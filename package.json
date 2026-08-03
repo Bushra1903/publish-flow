@@ -1,0 +1,12 @@
+{
+  "name": "publish-flow",
+  "version": "1.0.0",
+  "description": "Automated Headless CMS to GitHub to Live Deployment pipeline",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "verify": "node scripts/verify-connections.js"
+  },
+  "keywords": ["cms", "github-actions", "ssg", "ftp", "hostinger"],
+  "author": "",
+  "license": "MIT"
+}

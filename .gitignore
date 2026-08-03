@@ -1,2 +1,4 @@
 server/node_modules/
+client-react/node_modules/
 server/.env
+dist/
