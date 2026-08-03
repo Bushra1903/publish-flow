@@ -1,0 +1,40 @@
+name: Build and Deploy
+
+# This MUST include workflow_dispatch, or the server's triggerWorkflow() call
+# will fail with a 422 error. This file must exist on the branch you set as
+# GITHUB_BRANCH in server/.env (commit and push it there first).
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          if [ -f package.json ]; then npm install; else echo "No package.json, skipping install"; fi
+
+      - name: Build project
+        run: |
+          if [ -f package.json ]; then npm run build || echo "No build script, skipping"; else echo "Nothing to build"; fi
+
+      # Replace this with your real deploy step, e.g. FTP to Hostinger:
+      # - name: Deploy via FTP
+      #   uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      #   with:
+      #     server: ${{ secrets.FTP_SERVER }}
+      #     username: ${{ secrets.FTP_USERNAME }}
+      #     password: ${{ secrets.FTP_PASSWORD }}
+      #     local-dir: ./dist/
+      - name: Deploy (placeholder)
+        run: echo "Deploy step goes here (e.g. FTP-Deploy-Action for Hostinger)."
